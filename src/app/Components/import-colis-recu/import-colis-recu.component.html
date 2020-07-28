@@ -1,0 +1,80 @@
+<div class="col-md-8 form-group text-center m-auto">
+  <input style="display: none" class="inputfile" id="file" name="file" type="file" class="form-control"
+         (change)="onUpload($event)"
+         accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+  <label class="mt-3" for="file">Choisissez un fichier</label>
+</div>
+<div [hidden]="dataSources.length==0">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Recherche" #input>
+  </mat-form-field>
+  <mat-tab-group (selectedTabChange)="tabChanged($event)">
+    <mat-tab *ngFor="let dataSrc of dataSources,let i=index" [label]="sheetNames[i]| dateFormat">
+      <table mat-table [dataSource]="dataSrc" class="mat-elevation-z8" matSort>
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> No.</th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="nomExp">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom Expediteur</th>
+          <td mat-cell *matCellDef="let element"> {{element.nomExp}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="nomDest">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom Destination</th>
+          <td mat-cell *matCellDef="let element"> {{element.nomDest}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nbr">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> NBR</th>
+          <td mat-cell *matCellDef="let element"> {{element.nbr}} </td>
+        </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="regle">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Regle</th>
+          <td mat-cell *matCellDef="let element"> {{element.regle}} </td>
+        </ng-container>
+        <ng-container matColumnDef="montant">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Montant</th>
+          <td mat-cell *matCellDef="let element"> {{element.montant}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions</th>
+          <td mat-cell *matCellDef="let element"> <button class="btn btn-success">Valider</button> </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+    </mat-tab>
+  </mat-tab-group>
+  <mat-paginator [pageSizeOptions]="[5,10, 25,50, 100]"></mat-paginator>
+</div>
+<div *ngIf="isLoading">
+  <mat-progress-spinner
+    style="margin:auto auto;"
+    [color]="'primary'"
+    [mode]="'indeterminate'"
+    [value]="'50'"
+  >
+  </mat-progress-spinner>
+</div>
+<div *ngIf="isUploading">
+  <mat-progress-spinner
+    style="margin:auto auto;"
+    [color]="'primary'"
+    [mode]="'indeterminate'"
+    [value]="'50'"
+  >
+  </mat-progress-spinner>
+</div>

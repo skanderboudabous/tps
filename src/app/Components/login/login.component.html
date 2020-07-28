@@ -1,0 +1,49 @@
+<div *ngIf="!isLoading" class="body">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined"
+        rel="stylesheet"/>
+  <div class="container-fluid">
+    <div class="row">
+      <div id="hero-img" class="col img-fluid d-flex align-items-center justify-content-center">
+        <img src="assets/img/tps.png" />
+      </div>
+      <div id="login-form" class="col-lg d-flex align-items-center justify-content-center">
+
+        <form (ngSubmit)="login(loginForm.value)" [formGroup]="loginForm" class="w-75">
+          <div id="circle" class="d-flex"><i class="fa fa-user"></i></div>
+          <div class="card">
+            <div class="card-body">
+              <div class="form-group">
+                <mat-form-field>
+                  <label for="email">Email Adress</label>
+                  <input matInput type="email" name="email" formControlName="email" class="form-control" id="email" aria-describedby="emailHelp"
+                         placeholder="Email Address">
+                  <mat-error *ngIf="f.email.invalid">{{getEmailErrorMessages()}}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="form-group">
+                <mat-form-field>
+                  <label for="password">Password</label>
+                  <input matInput type="password" name="password" formControlName="password" required minlength="8" class="form-control"
+                         id="password" placeholder="Password">
+                  <mat-error *ngIf="f.password.invalid">{{getPasswordErrorMessages()}}</mat-error>
+                </mat-form-field>
+              </div>
+              <button [disabled]="loginForm.invalid" type="submit" id="btn" class="btn btn-block">Se Connecter</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="isLoading">
+  <mat-progress-spinner
+    style="margin:auto auto;"
+    [color]="'primary'"
+    [mode]="'indeterminate'"
+    [value]="'50'"
+  >
+  </mat-progress-spinner>
+</div>

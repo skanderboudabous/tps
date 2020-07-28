@@ -1,0 +1,82 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Ajouter Colis</h4>
+            <p class="card-category">Colis Exporté</p>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="formGroup" (ngSubmit)="submit(formGroup.value)">
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input required formControlName="id" name="id" matInput placeholder="N°Bon">
+                    <mat-error *ngIf="f.id.invalid">
+                      {{getIdErrorMessages()}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input required formControlName="nomExp" name="nomExp" matInput placeholder="Nom Expéditeur">
+                    <mat-error *ngIf="f.nomExp.invalid">
+                      {{getNomExpErrorMessages()}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input required formControlName="nomDest" name="nomDest" matInput placeholder="Nom Déstinataire" type="text">
+                    <mat-error *ngIf="f.nomDest.invalid">
+                      {{getNomDestErrorMessages()}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input required formControlName="nbr" name="nbr" matInput placeholder="Nbre de Colis" type="text">
+                    <mat-error *ngIf="f.nbr.invalid">
+                      {{getNbrErrorMessages()}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input required formControlName="regle" name="regle" matInput placeholder="Regle" type="text">
+                    <mat-error *ngIf="f.regle.invalid">
+                      {{getRegleErrorMessages()}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input required formControlName="montant" name="montant" matInput placeholder="Montant HT" type="text">
+                    <mat-error *ngIf="f.montant.invalid">
+                      {{getMontantErrorMessages()}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input required formControlName="numDest" name="numDest" (keypress)="numberOnly($event)" matInput placeholder="Numero de Déstinataire" type="text">
+                    <mat-error *ngIf="f.numDest.invalid">
+                      {{getNumDestErrorMessages()}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <button [disabled]="formGroup.invalid" mat-raised-button type="submit" class="btn btn-danger pull-right">Ajouter Colis</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

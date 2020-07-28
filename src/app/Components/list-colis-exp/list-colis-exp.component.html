@@ -1,0 +1,53 @@
+<div class="mt-5">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+    <!--  <ng-container matColumnDef="id">-->
+    <!--    <th mat-header-cell *matHeaderCellDef mat-sort-header> No.</th>-->
+    <!--    <td mat-cell *matCellDef="let element"> {{element.id}} </td>-->
+    <!--  </ng-container>-->
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nomExp">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom Expediteur</th>
+      <td mat-cell *matCellDef="let element"> {{element.nomExp}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="nomDest">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom Destination</th>
+      <td mat-cell *matCellDef="let element"> {{element.nomDest}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nbr">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> NBR</th>
+      <td mat-cell *matCellDef="let element"> {{element.nbr}} </td>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="regle">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Regle</th>
+      <td mat-cell *matCellDef="let element"> {{element.regle}} </td>
+    </ng-container>
+    <ng-container matColumnDef="montant">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Montant</th>
+      <td mat-cell *matCellDef="let element"> {{element.montant}} </td>
+    </ng-container>
+    <ng-container matColumnDef="numDest">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Numero de déstinaire</th>
+      <td mat-cell *matCellDef="let element"> {{element.numDest}} </td>
+    </ng-container>
+    <ng-container matColumnDef="etat">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Etat</th>
+      <td mat-cell *matCellDef="let element"> {{element.etat}} </td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <!--  <tr class="mat-row" *matNoDataRow>-->
+    <!--    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>-->
+    <!--  </tr>-->
+  </table>
+  <mat-paginator [pageSizeOptions]="[5,10, 25,50, 100]"></mat-paginator>
+
+</div>
